@@ -42,3 +42,13 @@ html, body {
 .stats-container:hover {
     opacity: 100%;
 }
+
+.graph-container {
+    opacity: 60%;
+    position: absolute;
+    bottom: 0;
+}
+
+.graph-container:hover {
+    opacity: 100%;
+}

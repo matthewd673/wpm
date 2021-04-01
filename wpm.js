@@ -281,7 +281,12 @@ var word_start_time;
 var characters_typed = 0;
 var characters_assigned = 0;
 
+var plot_x = 0;
+
 window.onload = (event) => {
+    //create plot
+    document.getElementById('graph').width = window.innerWidth - 20;
+    assign_canvas(document.getElementById('graph'));
     next_word = generate_word();
     present_next_word();
 }
@@ -310,6 +315,9 @@ window.addEventListener('keydown', function(event) {
             else {
                 var word_end_time = performance.now();
                 var ellapsed = word_end_time - word_start_time;
+
+                add_point(plot_x, ellapsed);
+                plot_x += 1;
 
                 if (ellapsed > hardest_word_time) {
                     hardest_word_time = ellapsed;
@@ -400,10 +408,12 @@ function on_tick() {
 
 function get_time_string(time) {
 
-    for (var i = time.length; i < 2; i++) {
-        time = "0" + time;
+    var time_string = time.toString();
+
+    for (var i = time_string.length; i < 2; i++) {
+        time_string = "0" + time_string;
     }
 
-    return "0:" + time;
+    return "0:" + time_string + " left";
 
 }

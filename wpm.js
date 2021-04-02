@@ -285,10 +285,23 @@ var plot_x = 0;
 
 window.onload = (event) => {
     //create plot
-    document.getElementById('graph').width = window.innerWidth - 20;
-    assign_canvas(document.getElementById('graph'));
+    build_graph();
     next_word = generate_word();
     present_next_word();
+}
+
+function build_graph() {
+    document.getElementById('graph').width = window.innerWidth - 20;
+    assignCanvas(document.getElementById('graph'));
+
+    setLineColor('#4e4e4e');
+    setLineWidth(2);
+    setPointRadius(3);
+    setPointColor(good_color);
+    setTextFont('12pt monospace');
+    setTextColor(good_color);
+    setTooltipColor('transparent');
+    setTooltipTextFormat('"{a}" ({y})');
 }
 
 //key listener
@@ -316,7 +329,7 @@ window.addEventListener('keydown', function(event) {
                 var word_end_time = performance.now();
                 var ellapsed = word_end_time - word_start_time;
 
-                add_point(plot_x, ellapsed);
+                addPoint(plot_x, ellapsed, word_goal);
                 plot_x += 1;
 
                 if (ellapsed > hardest_word_time) {
